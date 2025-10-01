@@ -8,10 +8,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  redirects: {
-    '/iracing-standings': '/iracing-standings/standings/elite',
-    '/iracing-standings/standings': '/iracing-standings/standings/elite'
-  },
   site: 'https://antsmo.github.io',
   base: '/iracing-standings',
 });
