@@ -1,0 +1,96 @@
+---
+import fs from 'fs';
+
+export function getStaticPaths() {
+  const json = fs.readFileSync('./src/data/standings.json', 'utf-8');
+  const data = JSON.parse(json);
+  const classNames = Object.keys(data);
+  console.log({ classNames });
+  return classNames.map((className) => (
+    { params: { className }}
+  ));
+}
+
+import Layout from '../../layouts/Layout.astro';
+import standings from '../../data/standings.json';
+
+type Params = {
+  className: keyof typeof standings;
+};
+
+const rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const colors = {
+  elite: '#212121',
+  pro: '#4285f4',
+  premier: '#34a853',
+  evo: '#df4242',
+};
+
+const { className } = Astro.params as Params;
+const backgroundColor = colors[className];
+---
+
+<Layout>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center">Rank</th>
+        <th class="text-left">Driver</th>
+        <th class="text-center"></th>
+        <th class="text-left">Team</th>
+        <th class="text-center font-bold">Points</th>
+        {rounds.map((roundNumber) => (
+          <th class="text-center">
+            R{roundNumber}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {(standings[className])?.map((driver: any, index: number) => (
+        <tr>
+          <td class="text-center">{index + 1}</td>
+          <td class="text-left">{driver.name}</td>
+          <td class="text-center">
+            <img
+              src={`https://flagcdn.com/w40/${driver.country}.png`}
+              srcset={`https://flagcdn.com/w80/${driver.country}.png 2x`}
+              width="40"
+              alt="">
+          </td>
+          <td class="text-left">{driver.team}</td>
+          <td class="text-center font-bold">{driver.points}</td>
+          {rounds.map((_, index) => (
+            <td class="text-center">
+              {driver.rounds[index] || '-'}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Layout>
+
+<style define:vars={{ backgroundColor }}>
+  table {
+    width: 100%;
+  }
+
+  th, td {
+    padding: 0.5rem;
+  }
+
+  th {
+    background-color: var(--backgroundColor);
+    color: white;
+  }
+
+  tr:nth-child(odd) td {
+    background-color: #eeeeee;
+  }
+
+  tr:hover td {
+    background-color: #dddddd;
+  }
+</style>
