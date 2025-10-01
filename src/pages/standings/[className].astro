@@ -37,7 +37,7 @@ const backgroundColor = colors[className];
       <tr>
         <th class="text-center">Rank</th>
         <th class="text-left">Driver</th>
-        <th class="text-center"></th>
+        <!-- <th class="text-center"></th> -->
         <th class="text-left">Team</th>
         <th class="text-center font-bold">Points</th>
         {rounds.map((roundNumber) => (
@@ -52,13 +52,13 @@ const backgroundColor = colors[className];
         <tr>
           <td class="text-center">{index + 1}</td>
           <td class="text-left">{driver.name}</td>
-          <td class="text-center">
+          {/* <td class="text-center">
             <img
               src={`https://flagcdn.com/w40/${driver.country}.png`}
               srcset={`https://flagcdn.com/w80/${driver.country}.png 2x`}
               width="40"
               alt="">
-          </td>
+          </td> */}
           <td class="text-left">{driver.team}</td>
           <td class="text-center font-bold">{driver.points}</td>
           {rounds.map((_, index) => (
