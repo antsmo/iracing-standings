@@ -9,8 +9,8 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   redirects: {
-    '/': '/standings/elite',
-    '/standings': '/standings/elite'
+    '/iracing-standings': '/iracing-standings/standings/elite',
+    '/iracing-standings/standings': '/iracing-standings/standings/elite'
   },
   site: 'https://antsmo.github.io',
   base: '/iracing-standings',
