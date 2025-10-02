@@ -35,13 +35,13 @@ const backgroundColor = colors[className];
   <table>
     <thead>
       <tr>
-        <th class="text-center">Rank</th>
-        <th class="text-left">Driver</th>
-        <!-- <th class="text-center"></th> -->
-        <th class="text-left">Team</th>
-        <th class="text-center font-bold">Points</th>
+        <th class="sticky top-0 text-center">Rank</th>
+        <th class="sticky top-0 z-20 left-0 text-left">Driver</th>
+        <!-- <th class="sticky top-0 text-center"></th> -->
+        <th class="sticky top-0 text-left">Team</th>
+        <th class="sticky top-0 text-center font-bold">Points</th>
         {rounds.map((roundNumber) => (
-          <th class="text-center">
+          <th class="sticky top-0 text-center">
             R{roundNumber}
           </th>
         ))}
@@ -51,7 +51,7 @@ const backgroundColor = colors[className];
       {(standings[className])?.map((driver: any, index: number) => (
         <tr>
           <td class="text-center">{index + 1}</td>
-          <td class="text-left">{driver.name}</td>
+          <td class="sticky left-0 z-10 text-left text-nowrap">{driver.name}</td>
           {/* <td class="text-center">
             <img
               src={`https://flagcdn.com/w40/${driver.country}.png`}
@@ -59,7 +59,7 @@ const backgroundColor = colors[className];
               width="40"
               alt="">
           </td> */}
-          <td class="text-left">{driver.team}</td>
+          <td class="text-left text-nowrap">{driver.team}</td>
           <td class="text-center font-bold">{driver.points}</td>
           {rounds.map((_, index) => (
             <td class="text-center">
@@ -75,6 +75,7 @@ const backgroundColor = colors[className];
 <style define:vars={{ backgroundColor }}>
   table {
     width: 100%;
+    min-height: 100vh;
   }
 
   th, td {
@@ -84,6 +85,10 @@ const backgroundColor = colors[className];
   th {
     background-color: var(--backgroundColor);
     color: white;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #ffffff;
   }
 
   tr:nth-child(odd) td {
